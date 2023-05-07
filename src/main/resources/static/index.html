@@ -1,15 +1,57 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Testing an ODRL Evaluator</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/cerulean/bootstrap.min.css" >
     </head>
-    <body>
-        <div>TODO write content</div>
+    <body onload="init()">
+        <div class="container">
+            <div class="row">
+                <div class="page-header">
+                    <h2>ODRL Evaluator</h2>
+                </div>         
+                <div class="col-md-5">
+                    <div class="panel panel-default"> 
+                        <div class="panel-body">
+                            <h4>Context</h4>
+                            <div class="col-xs-12">
+                                <textarea style="font-size:small;font-family:monospace;" class="form-control" rows="8" id="world" name="world"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-5">
+                    <div class="panel panel-default"> 
+                        <div class="panel-body">
+                            <h4>Policy</h4>
+                            <div class="col-xs-12">
+                                <textarea style="font-size:small;font-family:monospace;" class="form-control" rows="8" id="policy" name="policy"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>            </div>
+            <div class="row">
+                <h4>Evaluation</h4>
+            </div>
+        </div>
+
+        <script>
+            function init()
+            {
+                console.log("Demo");
+                var currentdate = new Date();
+                var sdate = "<http://example.org/execution/123> <http://purl.org/dc/terms/date> \"" + currentdate.getDate() + "/" + (currentdate.getMonth()+1)
+                        + "/" + currentdate.getFullYear() + "\".";
+                var stime = "<http://example.org/execution/123> <http://purl.org/dc/terms/time> '" + currentdate.getHours() + ":"
+                        + currentdate.getMinutes() + ":" + currentdate.getSeconds() + "';";
+                console.log(sdate);
+                document.getElementById('world').value = sdate;
+            }
+        </script>
+
     </body>
 </html>
