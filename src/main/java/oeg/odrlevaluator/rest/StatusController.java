@@ -3,7 +3,7 @@ package oeg.odrlevaluator.rest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import oeg.odrlevaluator.model.Permission;
+import oeg.odrlevaluator.model.Policy;
 import oeg.odrlevaluator.model.Status;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +37,7 @@ public class StatusController {
     @PostMapping(value = "", produces="application/json", consumes = "application/json")
     @CrossOrigin(origins = "*")
     @ResponseBody
-    public Permission statuspost(@RequestBody Permission p) {
+    public Policy statuspost(@RequestBody Policy p) {
         return p;
     }
 }
