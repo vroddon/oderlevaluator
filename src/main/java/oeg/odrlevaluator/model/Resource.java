@@ -3,16 +3,48 @@ package oeg.odrlevaluator.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
- *
+ * RDF Resource as defined in RDF with some useful attributes and methods.
+ * Current default attributes: id (URI), types, label
  * @author victor
  */
 public class Resource {
 
     @JsonProperty("@id")
     String id;
+    
+    @JsonProperty("rdf:type")
+    Set<String> types = new HashSet();
+
+    @JsonProperty("http://www.w3.org/2000/01/rdf-schema#label")
+    String label;
+    
+    
+    public Set<String> getTypes() {
+        return types;
+    }
+    
+    public void addType(String type)
+    {
+        types.add(type);
+    }
+    
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
     
     public Resource()
     {
@@ -52,5 +84,6 @@ public class Resource {
         }
         return "ex:"+id;
     }
+
 
 }

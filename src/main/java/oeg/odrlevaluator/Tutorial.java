@@ -13,7 +13,10 @@ public class Tutorial {
     public static void main(String[] args) {
 
         Policy p = new Policy();
+        p.setLabel("Sample policy to test the specs draft");
         Rule r = new Rule();
+        r.addType("odrl:Permission");
+        r.setAction("odrl:play");
         p.addRule(r);
         
         PermissionValidator validator = new PermissionValidator();

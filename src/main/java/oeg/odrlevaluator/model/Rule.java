@@ -4,10 +4,25 @@
  */
 package oeg.odrlevaluator.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldType;
+
 /**
  *
  * @author victor
  */
-public class Rule {
+@JsonldType("odrl:Permission")
+public class Rule extends Resource {
+    
+    @JsonProperty("http://www.w3.org/ns/odrl/2/action")
+    String action;
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
     
 }
