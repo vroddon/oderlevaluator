@@ -14,6 +14,11 @@ import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldType;
 @JsonldType("odrl:Permission")
 public class Rule extends Resource {
     
+    
+    /* esto es lo deseado dentro del json id
+        "http://www.w3.org/ns/odrl/2/action": {"@id": "odrl:action"}
+    */
+    //VICTOR AQUI TENGO QUE PRODUCIR ESTO   "http://www.w3.org/ns/odrl/2/action": {"@id": "odrl:action"}
     @JsonProperty("http://www.w3.org/ns/odrl/2/action")
     String action;
 

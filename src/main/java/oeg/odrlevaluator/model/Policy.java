@@ -21,7 +21,7 @@ public class Policy extends Resource {
     private Set<Rule> rules = new HashSet();
     
     @JsonProperty("@context")
-    final private String CONTEXT = "http://www.w3.org/ns/odrl.jsonld";
+    final private String CONTEXT = "http://cosasbuenas.es/odrl-e/odrl3.jsonld";//"http://www.w3.org/ns/odrl.jsonld";
 
     public Policy()
     {
