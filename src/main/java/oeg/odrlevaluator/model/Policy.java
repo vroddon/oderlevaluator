@@ -9,7 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * ODRL Permission
+ * ODRL Policy.
+ * It has 
  * @author victor
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
