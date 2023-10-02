@@ -11,16 +11,12 @@
     "foaf":    "http://xmlns.com/foaf/0.1/",
     "schema":  "http://schema.org/",
     "cc":      "http://creativecommons.org/ns#",
-
     "uid":     "@id",
     "type":    "@type",
-
     "Policy":           "odrl:Policy",
     "Rule":             "odrl:Rule",
     "profile":          {"@type": "@id", "@id": "odrl:profile"},
-
     "inheritFrom":      {"@type": "@id", "@id": "odrl:inheritFrom"},
-
     "ConflictTerm":     "odrl:ConflictTerm",
     "conflict":         {"@type": "@vocab", "@id": "odrl:conflict"},
     "perm":             "odrl:perm",

@@ -14,10 +14,11 @@ public class Tutorial {
     public static void main(String[] args) {
 
         Policy p = new Policy();
+        p.doRandomId();
         p.setLabel("Sample policy to test the specs draft");
         Rule r = new Rule();
-        r.addType("odrl:Permissionº");
-        r.setAction("odrl:play");
+        r.addType("Permission");
+        r.setAction("play");
 
         Constraint c = new Constraint();
         

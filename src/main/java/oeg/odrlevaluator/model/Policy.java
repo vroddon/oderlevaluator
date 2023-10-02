@@ -26,6 +26,7 @@ public class Policy extends Resource {
 
     public Policy()
     {
+    //    id = getRandomId(4);
         addType("odrl:Policy");
     }
 

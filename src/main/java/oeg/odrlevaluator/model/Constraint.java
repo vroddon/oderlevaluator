@@ -1,18 +1,27 @@
 package oeg.odrlevaluator.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ioinformarics.oss.jackson.module.jsonld.annotation.JsonldType;
+import oeg.odrlevaluator.Misc;
 
 /**
  *
  * @author victor
  */
+@JsonInclude(Include.NON_NULL)
 @JsonldType("odrl:Constraint")
 public class Constraint extends Resource {
 
+    @JsonProperty("odrl:leftOperand")
     private String leftOperand = "";
+    
     private String operator = "";
+
+    @JsonProperty("rightOperand")
     private RightOperand rightOperand = new RightOperand();
     
     public static void main(String[] args) {
@@ -20,6 +29,7 @@ public class Constraint extends Resource {
         c.setOperator("eq");
         c.setLeftOperand("media");
         c.setRightOperand(new RightOperand("online", "xsd:string"));
+        c.doRandomId();
         System.out.println(c);
     }
     
@@ -69,5 +79,20 @@ public class Constraint extends Resource {
      */
     public void setOperator(String operator) {
         this.operator = operator;
+    }
+    
+    public String toString()
+    {
+        String json="{}";
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            json = mapper.writeValueAsString(this);
+       //     config.setSerializationInclusion(JsonSerialize.Inclusion.NON_EMPTY);
+            json = Misc.addContext(json);
+            return json;
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return "{}";
+        }
     }
 }

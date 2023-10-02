@@ -1,5 +1,6 @@
 package oeg.odrlevaluator.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,11 +13,13 @@ import java.util.UUID;
  * Current default attributes: id (URI), types, label
  * @author victor
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Resource {
 
     @JsonProperty("@id")
     String id;
     
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonProperty("rdf:type")
     Set<String> types = new HashSet();
 
@@ -48,9 +51,12 @@ public class Resource {
     
     public Resource()
     {
+    //    id = getRandomId(4);
+    }
+    public void doRandomId()
+    {
         id = getRandomId(4);
     }
-    
     
     public String getId() {
         return id;
@@ -62,14 +68,13 @@ public class Resource {
 
     @Override
     public String toString() {
-
         try {
             ObjectMapper mapper = new ObjectMapper();
             return mapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
+            return "{}";
         }
-        return "{}";
     }
 
     public static String getRandomId(int length) {

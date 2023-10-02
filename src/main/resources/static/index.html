@@ -5,62 +5,106 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/cerulean/bootstrap.min.css" >
-        
+
         <style>
-        footer {margin-top: 200px;margin-left:50px; }
+            footer {
+                margin-top: 200px;
+                margin-left:50px;
+            }
         </style>
-        
+
     </head>
     <body onload="init()">
         <div class="container">
             <div class="row">
                 <div class="page-header">
                     <h2>ODRL Evaluator</h2>
+                    The ODRL Evaluator is an implementation of the specs of the ODRL Formal Semantics Draft Community Group <a href="https://w3c.github.io/odrl/formal-semantics">Report</a> under development.
+                    The task of an ODRL Evaluator is to determine, given a particular state of the world, (represented using the classes and properties defined in a specific ontology), which Permissions, Prohibitions, and Obligations are active and whether or not performing a certain action leads to violations or to fulfillments.
+                    An implementation of the specs is conformant if it reproduces the expected behaviour in a test bed. 
                 </div>         
                 <div class="col-md-5">
                     <div class="panel panel-default"> 
                         <div class="panel-body">
-                            <h4>Context</h4>
+                            <h4>State of the world</h4>
                             <div class="col-xs-12">
                                 <textarea style="font-size:small;font-family:monospace;" class="form-control" rows="8" id="world" name="world"></textarea>
+                                <select id="idsamplecontext" onchange="samplecontext()">
+                                    <option>context00.json</option>
+                                    <option>context22.json</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-5">
+        <!--        <div class="col-md-1">
+                </div> -->
+                <div class="col-md-6">
                     <div class="panel panel-default"> 
                         <div class="panel-body">
                             <h4>Policy</h4>
                             <div class="col-xs-12">
-                                <textarea style="font-size:small;font-family:monospace;" class="form-control" rows="8" id="policy" name="policy"></textarea>
+                                <textarea style="font-size:small;font-family:monospace;" class="form-control" rows="8" id="idpolicy" name="policy"></textarea>
+                                <select id="idsamplepolicy" onchange="samplepolicy()">
+                                    <option>sample00.json</option>
+                                    <option>sample22.json</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </div>            </div>
             <div class="row">
+                <button type="button" class="btn btn-primary" id="idEvaluate">Evaluate</button>
                 <h4>Evaluation</h4>
+                <div id="idEvalResults"></div>
             </div>
         </div>
-        
+
         <footer>
             ODRL Evaluator (proof of concept). Sep. 2023. 
             <a href="https://w3c.github.io/odrl/formal-semantics"><img src="./w3ccg.png" width="20"/></a> Draft specifications at W3C ODRL Community Group. 
             <a href="https://github.com/vroddon/odrlevaluator"><img src="./github.png" width="20"/></a> Source code of this web application<br/>
         </footer>
 
-        <script>
+        <script type="text/javascript">
+
             function init()
             {
                 console.log("Demo");
                 var currentdate = new Date();
-                var sdate = "<http://example.org/execution/123> <http://purl.org/dc/terms/date> \"" + currentdate.getDate() + "/" + (currentdate.getMonth()+1)
+                var sdate = "<http://example.org/execution/123> <http://purl.org/dc/terms/date> \"" + currentdate.getDate() + "/" + (currentdate.getMonth() + 1)
                         + "/" + currentdate.getFullYear() + "\".";
                 var stime = "<http://example.org/execution/123> <http://purl.org/dc/terms/time> '" + currentdate.getHours() + ":"
                         + currentdate.getMinutes() + ":" + currentdate.getSeconds() + "';";
                 console.log(sdate);
                 document.getElementById('world').value = sdate;
+                
+                var myButton = document.getElementById("idEvaluate");
+                myButton.addEventListener("click", doEvaluate);                
+                
+            }
+            function doEvaluate() {
+                var str = '' ;
+                str += 'Constraint _:0 is <font color="green">fulfilled</font><br/>';
+                str += 'Refinement _:1 is <font color="red">not fulfilled</font><br/>';
+                str += 'Duty _:2 is <font color="red">not fulfilled</font><br/>'
+                str += 'Permission _:3 is <font color="red">inactive</font><br/>';
+                str += '✅ <font color="green">The test has been pased</font><br/>';
+                document.getElementById('idEvalResults').innerHTML = str;
+            }            
+            
+            function samplepolicy()
+            {
+                var v = document.getElementById("idsamplepolicy");
+                var archivo = v.options[v.selectedIndex].text;
+                console.log(archivo);
+                var client = new XMLHttpRequest();
+                client.open('GET', 'samples/' + archivo);
+                client.onreadystatechange = function () {
+                    //alert(client.responseText);
+                    document.getElementById('idpolicy').value = client.responseText;
+                }
+                client.send();
             }
         </script>
 
